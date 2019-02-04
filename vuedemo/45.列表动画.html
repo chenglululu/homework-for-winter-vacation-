@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .v-enter{
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: all 2s
+        }
+        .v-leave-to{
+            opacity: 0;
+        }
+        .v-leave-active{
+            transition: all 2s
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="add">点击增加数据</button>
+        <transition-group>
+            <div v-for="(item, index) in list" :key="index" >
+                {{item.id}} --- {{item.title}}
+            </div>
+        </transition-group>
+    </div>
+    <script>
+        var num=0
+        new Vue({
+            el:"#app",
+            data:{
+                list:[]
+            },
+            methods: {
+                add(){
+                    this.list.push({
+                        id:++num,
+                        title:'happy new year'+num
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>

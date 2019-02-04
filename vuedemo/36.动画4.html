@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+    <div id="app">
+       <button @click="change">切换动画</button>
+       <transition
+       name='fade'
+       enter-active-class="animated swing"
+       leave-active-class="animated shake">
+            <div v-show="flag">新年好</div>
+       </transition>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                flag:true
+            },
+            methods: {
+                change(){
+                    this.flag=!this.flag
+                }
+            },
+        })
+    </script>
+</body>
+</html>

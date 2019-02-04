@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <link rel="stylesheet" href="./animate.css">
+</head>
+<body>
+  <div id="app">
+      <button @click="change" >切换动画</button>
+    <transition
+        @before-leave="beforeLeaveHandle"
+        @leave="LeaveHandel"
+        @after-leave="afterLeaveHandel"  >
+            <div v-show="flag" >happy new year</div>
+    </transition>
+  </div>  
+  <script>
+      new Vue({
+          el:"#app",
+          data:{
+              flag:true
+          },
+          methods: {
+              change(){
+                  this.flag=!this.flag
+              },
+              beforeLeaveHandle(el){
+                  el.style.opacity=0
+              },
+              LeaveHandel(el,done){
+                  setTimeout(()=>{
+                      Velocity(el,{
+                          opacity:1
+                      },{
+                          duration:1000,
+                          complete:done
+                      })
+                  },2000)
+              },
+              afterLeaveHandel(el){
+                  console.log("动画完成")
+                  el.style.fontSize="16px"
+                  el.style.backgroundColor=""
+              }
+          },
+      })
+  </script>
+</body>
+</html>
